@@ -1,0 +1,22 @@
+<div class="container my-5">
+  <h1>Add new note</h1>
+  <div class="row">
+    <div class="col-6">
+      <form #form="ngForm" (ngSubmit)="addNote()">
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" class="form-control" id="title" name="title" [(ngModel)]="addNoteRequest.title">
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <input type="text" class="form-control" id="description" name="description" [(ngModel)]="addNoteRequest.description">
+        </div>
+        <div class="mb-3">
+          <label for="colorHex" class="form-label">ColorHex</label>
+          <input type="text" class="form-control" id="colorHex" name="colorHex" [(ngModel)]="addNoteRequest.colorHex">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>  
+</div>

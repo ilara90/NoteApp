@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\components",
+    "\\src\\app\\components\\notes",
+    "\\src\\app\\components\\notes\\add-note",
+    "\\src\\app\\components\\notes\\edit-note",
+    "\\src\\app\\components\\notes\\notes-card",
+    "\\src\\app\\services",
+    "\\src\\environments"
+  ],
+  "SelectedNode": "\\src\\app\\components\\notes\\notes-card\\notes-card.component.html",
+  "PreviewInSolutionExplorer": false
+}
