@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NotesApp.API.Models.DonainModels;
+using NotesApp.API.Models.DomainModels;
 
 namespace NotesApp.API.Data
 {

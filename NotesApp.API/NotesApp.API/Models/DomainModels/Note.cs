@@ -1,4 +1,4 @@
-﻿namespace NotesApp.API.Models.DTO
+﻿namespace NotesApp.API.Models.DomainModels
 {
     public class Note
     {

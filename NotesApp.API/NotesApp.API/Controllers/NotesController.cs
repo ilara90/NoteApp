@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NotesApp.API.Data;
-using NotesApp.API.Models.DonainModels;
 using NotesApp.API.Models.DTO;
 
 namespace NotesApp.API.Controllers
@@ -11,25 +11,22 @@ namespace NotesApp.API.Controllers
     public class NotesController : ControllerBase
     {
         private readonly NotesDbContext _notesDbContext;
+        private IMapper _mapper;
 
-        public NotesController(NotesDbContext notesDbContext)
+        public NotesController(NotesDbContext notesDbContext, IMapper mapper)
         {
             _notesDbContext = notesDbContext;
+            _mapper = mapper;
         }
 
         [HttpPost]
-        public IActionResult AddNote(AddNoteRequest addNoteRequest)
+        public async Task<IActionResult> AddNote(AddNoteRequest addNoteRequest)
         {
-            var note = new Models.DonainModels.Note
-            {
-                Title = addNoteRequest.Title,
-                Description = addNoteRequest.Description,
-                ColorHex = addNoteRequest.ColorHex,
-                DateCreated = DateTime.Now
-            };
+            var note = _mapper.Map<Models.DomainModels.Note>(addNoteRequest);
+            note.DateCreated = DateTime.Now;
 
-            _notesDbContext.Notes.Add(note);
-            _notesDbContext.SaveChanges();
+            await _notesDbContext.Notes.AddAsync(note);
+            await _notesDbContext.SaveChangesAsync();
 
             return Ok(note);
         }
@@ -41,16 +38,9 @@ namespace NotesApp.API.Controllers
 
             var notesDTO = new List<Models.DTO.Note>();
 
-            foreach(var note in notes)
+            foreach (var note in notes)
             {
-                notesDTO.Add(new Models.DTO.Note
-                {
-                    Id = note.Id,
-                    Title = note.Title,
-                    Description = note.Description,
-                    ColorHex = note.ColorHex,
-                    DateCreated = note.DateCreated
-                });
+                notesDTO.Add(_mapper.Map<Models.DTO.Note>(note));
             }
 
             return Ok(notesDTO);
@@ -64,14 +54,7 @@ namespace NotesApp.API.Controllers
 
             if (note != null)
             {
-                var notesDTO = new Models.DTO.Note
-                {
-                    Id = note.Id,
-                    Title = note.Title,
-                    Description = note.Description,
-                    ColorHex = note.ColorHex,
-                    DateCreated = note.DateCreated
-                };
+                var notesDTO = _mapper.Map<Models.DomainModels.Note>(note);
 
                 return Ok(note);
             }

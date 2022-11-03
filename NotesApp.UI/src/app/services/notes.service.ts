@@ -18,8 +18,6 @@ export class NotesService {
   }
 
   addNote(addNoteRequest: Note): Observable<Note> {
-    addNoteRequest.id = '00000000-0000-0000-0000-000000000000';
-    addNoteRequest.dateCreated = new Date();
     return this.http.post<Note>(this.baseApiUrl + '/api/notes', addNoteRequest);
   }
 

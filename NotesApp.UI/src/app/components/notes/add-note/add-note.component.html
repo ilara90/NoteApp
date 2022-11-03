@@ -5,17 +5,17 @@
       <form #form="ngForm" (ngSubmit)="addNote()">
         <div class="mb-3">
           <label for="title" class="form-label">Title</label>
-          <input type="text" class="form-control" id="title" name="title" [(ngModel)]="addNoteRequest.title">
+          <input type="text" class="form-control" id="title" name="title" [(ngModel)]="addNoteRequest.title"  #title="ngModel" required />
         </div>
         <div class="mb-3">
           <label for="description" class="form-label">Description</label>
-          <input type="text" class="form-control" id="description" name="description" [(ngModel)]="addNoteRequest.description">
+          <textarea type="text" class="form-control" rows="7" id="description" name="description" [(ngModel)]="addNoteRequest.description" #description="ngModel" required> </textarea>
         </div>
         <div class="mb-3">
           <label for="colorHex" class="form-label">ColorHex</label>
-          <input type="text" class="form-control" id="colorHex" name="colorHex" [(ngModel)]="addNoteRequest.colorHex">
+          <input type="text" class="form-control" id="colorHex" name="colorHex" [(ngModel)]="addNoteRequest.colorHex" #colorHex="ngModel" required pattern="^#[0-9a-fA-F]{3,6}" />
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" [disabled]="title.invalid || description.invalid || colorHex.invalid" >Submit</button>
       </form>
     </div>
   </div>  
